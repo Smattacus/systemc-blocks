@@ -23,4 +23,4 @@ SC_MODULE(stim){
         SC_THREAD(StimGen);
         sensitive << Clk.pos();
     }
-}
+};
