@@ -11,17 +11,15 @@ class consumer : public sc_module
     {
         char output[21];
         output[21] = '\0';
+        for (int j=0; j < 21; j++) output[j] = ' ';
         int i = 0;
         while (true)
         {
             wait();
-            if (in->is_full())
-            {
-                cout << "we are full!" << endl;
-                while (in -> nb_read(output[i++])) {};
-                cout << "i = " << i << " Read '" << output << "' at " << sc_time_stamp() << endl;
-                i = 0;
+            if (in->nb_read(output[i++])){
+                cout << "R " << output[i-1] << " at " << sc_time_stamp() << endl;
             }
+            i = i % 20;
         }
     }
     SC_CTOR(consumer)

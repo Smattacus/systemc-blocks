@@ -8,7 +8,7 @@ class stack :
 {
 private:
     char data[20];
-    int top;
+    int top; // Points to the next available spot in the stack.
 public:
     stack(sc_module_name nm) : sc_module(nm), top(0) {};
 
@@ -24,12 +24,9 @@ public:
     void reset() {this->top = 0;};
 
     bool nb_read(char& c) {
-        if (top >= 0){
-            c = this->data[this->top--];
-            if (top < 0) {
-                top = 0;
-                return false;
-            }
+        if (top > 0){
+            top--;
+            c = this->data[this->top];
             return true;
         }
         return false;
