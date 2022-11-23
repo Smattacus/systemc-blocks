@@ -1,7 +1,8 @@
 #include "systemc.h"
-#include "fft.sharpener.cpp"
+#include "sharpener.h"
 
 int sc_main(int args, char ** argv) {
     std::cout << "Hello world!" << endl;
-    return;
-}
+    sc_start();
+    return 0;
+};
