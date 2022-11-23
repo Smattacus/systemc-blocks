@@ -3,8 +3,12 @@
 
 void sharpener::entry(){
 
-    sc_int<32> input_memory[100][100][24];
-    sc_int<32> output_memory[100][100][24];
+    sc_int<8> input_memory_red[100][100];
+    sc_int<8> input_memory_green[100][100];
+    sc_int<8> input_memory_blue[100][100];
+    sc_int<8> output_memory_red[100][100];
+    sc_int<8> output_memory_green[100][100];
+    sc_int<8> output_memory_blue[100][100];
     int im_width = 100;
     int im_height = 100;
     unsigned int index;
@@ -19,11 +23,10 @@ void sharpener::entry(){
         while (index < 10000) {
             data_req.write(true);
             do {wait();} while (data_valid == true);
-            input_memory[index] = { 
-                in_red.read(),
-                in_green.read(),
-                in_blue.read()
-            };
+            input_memory_red[index] = in_red.read();
+            input_memory_green[index] = in_green.read();
+            input_memory_blue[index] = in_blue.read();
+        };
             index++;
             data_req.write(false);
             wait();
@@ -96,4 +99,8 @@ void sharpener::entry(){
         cout << "Done..." << endl;
     }
 
+}
+
+int sharpen_pixel(sc_int **memory, sc_int **kernel) {
+    
 }
