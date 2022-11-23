@@ -4,7 +4,6 @@
 
 class source{
 
-    FILE *fp_image;
 
 
 
