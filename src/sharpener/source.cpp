@@ -24,7 +24,6 @@ void source::entry() {
         while (!(data_req == true)) {wait(); };
         if (i_rows >= input_reader.get_height()) {
             std::cout << "Input stream is done! Source will return control to the kernel." << std::endl;
-            sc_stop();
             break;
         }
         in_red.write(input_reader.row_pointers[i_rows][0]);
@@ -36,4 +35,5 @@ void source::entry() {
         data_valid.write(false);
         wait();
     };
+    while (true) {wait();};
 };

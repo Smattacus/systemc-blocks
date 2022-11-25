@@ -19,6 +19,7 @@ void sink::entry() {
     std::cout << "Output image opened..." << endl;
 
     int i_rows = 0;
+    int j_rows = 0;
 
     data_ack.write(false);
 
@@ -34,6 +35,9 @@ void sink::entry() {
         input_reader.row_pointers[i_rows][0] = out_red.read();
         input_reader.row_pointers[i_rows][1] = out_green.read();
         input_reader.row_pointers[i_rows][2] = out_blue.read();
+        std::cout << "i = " << i_rows << "; Expected over calculated RGB:" << std::endl;
+        std::cout << "R = " << +reference_image.row_pointers[i_rows][0] << " G = " << +reference_image.row_pointers[i_rows][1] << " B = " << +reference_image.row_pointers[i_rows][2] << std::endl;
+        std::cout << "R = " << +input_reader.row_pointers[i_rows][0] << " G = " << +input_reader.row_pointers[i_rows][1] << " B = " << +input_reader.row_pointers[i_rows][2] << std::endl;
         data_ack.write(true);
         while (!(data_ready == false)) {wait();};
         data_ack.write(false);
@@ -42,6 +46,7 @@ void sink::entry() {
     std::cout << "Writing to file: " << outfile << std::endl;
     input_reader.write_png(outfile);
     std::cout << "Done filewriting!" << std::endl;
+    sc_stop();
     while (true) {wait();};
 
 }
