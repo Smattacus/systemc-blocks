@@ -23,7 +23,6 @@ sc_int<9> sharpen_pixel_3x3kernel(int i, int j, sc_int<9> memory[][100], sc_int<
     int jp1 = (j + 1 >= 100) ? j : j + 1;
 
     // Sharpen it
-    // TODO: This is wrong; do this for each of RGB.
     calc_kernel[0][0] = memory[im1][jm1] * kernel[0][0];
     calc_kernel[0][1] = memory[im1][j] * kernel[0][1];
     calc_kernel[0][2] = memory[im1][jp1] * kernel[0][2];
