@@ -4,6 +4,9 @@
 #include "png_reader.h"
 
 void source::entry() {
+
+    std::cout << "Beginning source" << std::endl;
+
     FILE *input_image;
 
     data_valid.write(false);
@@ -13,6 +16,8 @@ void source::entry() {
     input_reader.read_png(infile);
 
     int i_rows = 0;
+
+    std::cout << "Source entering while loop" << std::endl;
 
     while(true) 
     {
@@ -25,6 +30,7 @@ void source::entry() {
         in_red.write(input_reader.row_pointers[i_rows][0]);
         in_green.write(input_reader.row_pointers[i_rows][1]);
         in_red.write(input_reader.row_pointers[i_rows][2]);
+        i_rows++;
         data_valid.write(true);
         while (!(data_req == true)) {wait(); };
         data_valid.write(false);

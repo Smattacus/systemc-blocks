@@ -11,10 +11,11 @@ class sink: sc_module {
 
         sc_in_clk CLK;
 
+        void entry();
+
         SC_CTOR(sink)
         {
             SC_CTHREAD(entry, CLK.pos());
         };
 
-        void entry();
 };

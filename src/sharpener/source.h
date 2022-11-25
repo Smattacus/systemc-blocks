@@ -10,11 +10,11 @@ class source: sc_module {
 
         sc_in_clk CLK;
 
+        void entry();
+
         SC_CTOR(source)
         {
             SC_CTHREAD(entry, CLK.pos());
         }
-
-        void entry();
 
 };

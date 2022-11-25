@@ -8,14 +8,21 @@ void sink::entry() {
 
     PNG_Reader input_reader;
     PNG_Reader reference_image;
+
     char ref_image_name[256] = "/workspaces/systemc-blocks/src/sharpener/Vd-Sharp_reference.png";
-    char outfile[256] = "/workspaces/systemc-blocks/src/sharpener/sharpener_output.png"
+    char outfile[256] = "/workspaces/systemc-blocks/src/sharpener/sharpener_output.png";
+
+    std::cout << "Loading ref image..." << endl;
     reference_image.read_png(ref_image_name);
+    std::cout << "Opening output image..." << endl;
     input_reader.read_png(outfile);
+    std::cout << "Output image opened..." << endl;
 
     int i_rows = 0;
 
     data_ack.write(false);
+
+    std::cout << "Sink entering while loop..." << std::endl;
 
     while(true)
     {
@@ -26,14 +33,14 @@ void sink::entry() {
         }
         input_reader.row_pointers[i_rows][0] = out_red.read();
         input_reader.row_pointers[i_rows][1] = out_green.read();
-        input_reader.row_pointers[i_rows][2] = out_green.blue();
+        input_reader.row_pointers[i_rows][2] = out_blue.read();
         data_ack.write(true);
         while (!(data_ready == false)) {wait();};
         data_ack.write(false);
         i_rows++;
     }
-    std::cout << "Writing to file: " << filename << std::endl;
-    input_reader.write_png(filename);
+    std::cout << "Writing to file: " << outfile << std::endl;
+    input_reader.write_png(outfile);
     std::cout << "Done filewriting!" << std::endl;
     while (true) {wait();};
 
