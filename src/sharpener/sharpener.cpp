@@ -5,6 +5,11 @@ sc_int<9> sharpen_pixel_3x3kernel(int i, int j, sc_int<9> memory[][100], sc_int<
     /*
     Sharpens the given pixel in the memory. This is a brute force routine.
     It assumes that the kernel is 3x3.
+
+    Edge treatment: "reflect" aka "half sample symmetric"
+    The reflection point is half past the boundary:
+    1 | 2 |||| 2 | 1
+    |||| is the image boundary.
     */
 
     sc_int<9> calc_kernel[3][3] = {
@@ -76,19 +81,15 @@ void sharpener::entry(){
         index_i = 0;
         index_j = 0;
 
-        // Process the data
+        //For the first iteration, we'll do a brute force
+        // computation.
         sc_int<9> kernel[3][3] = {
             0, -1, 0,
             -1, 5, -1,
             0, -1, 0
         };
-        //For the first iteration, we'll do a brute force
-        // computation.
+        // Process the data
         sc_int<9> sharpened = 0;
-        // Edge treatment: "reflect" aka "half sample symmetric"
-        // The reflection point is half past the boundary:
-        // 1 | 2 |||| 2 | 1
-        // |||| is the image boundary.
         for (int i=0; i < 100; i++) {
             for (int j=0; j < 100; j++) {
                 output_memory_red[i][j] = sharpen_pixel_3x3kernel(i, j, input_memory_red, kernel);
