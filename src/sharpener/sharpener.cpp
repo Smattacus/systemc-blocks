@@ -44,7 +44,7 @@ sc_int<9> sharpen_pixel_3x3kernel(int i, int j, sc_int<9> memory[][100], sc_int<
 
 };
 
-void sharpener::entry(){
+void sharpener::entry() {
 
     sc_int<9> input_memory_red[100][100];
     sc_int<9> input_memory_green[100][100];
