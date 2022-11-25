@@ -17,6 +17,7 @@ link_libraries("libz.a")
 
 add_library(source sharpener/source.cpp)
 add_library(sink sharpener/sink.cpp)
+add_library(sharpener sharpener/sharpener.cpp)
 
 project(blocks)
 
@@ -25,4 +26,4 @@ add_executable(hello hello.cpp)
 add_executable(test_stack stack/test_stack.cpp)
 add_executable(test_sharpener sharpener/test_sharpener.cpp)
 
-target_link_libraries(test_sharpener source sink)
+target_link_libraries(test_sharpener sharpener source sink)
