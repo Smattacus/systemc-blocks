@@ -112,15 +112,16 @@ void sharpener::entry() {
         cout << "Writing the transformed data..." << endl;
         index_i = 0;
         index_j = 0;
-        while ( index_i < 100 && index_j < 300){
+        while ( index_i < 100 && index_j < 100){
             index_i %= 100;
-            out_red.write(output_memory_red[index_i][index_j++]);
-            out_green.write(output_memory_green[index_i][index_j++]);
-            out_blue.write(output_memory_blue[index_i][index_j++]);
+            out_red.write(output_memory_red[index_i][index_j]);
+            out_green.write(output_memory_green[index_i][index_j]);
+            out_blue.write(output_memory_blue[index_i][index_j]);
             data_ready.write(true);
             do {wait(); } while (!(data_ack == true));
             data_ready.write(false);
-            if (index_j == 300) {
+            index_j++;
+            if (index_j == 100) {
                 index_j = 0;
                 index_i++;
             }
