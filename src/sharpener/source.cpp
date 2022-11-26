@@ -16,6 +16,7 @@ void source::entry() {
     input_reader.read_png(infile);
 
     int i_rows = 0;
+    int j_col = 0;
 
     std::cout << "Source entering while loop" << std::endl;
 
@@ -26,12 +27,15 @@ void source::entry() {
             std::cout << "Input stream is done! Source will return control to the kernel." << std::endl;
             break;
         }
-        in_red.write(input_reader.row_pointers[i_rows][0]);
-        in_green.write(input_reader.row_pointers[i_rows][1]);
-        in_red.write(input_reader.row_pointers[i_rows][2]);
-        i_rows++;
+        in_red.write(input_reader.row_pointers[i_rows][j_col++]);
+        in_green.write(input_reader.row_pointers[i_rows][j_col++]);
+        in_blue.write(input_reader.row_pointers[i_rows][j_col++]);
+        if (j_col >= (input_reader.get_width() * 3)) {
+            j_col = 0;
+            i_rows++;
+        }
         data_valid.write(true);
-        while (!(data_req == true)) {wait(); };
+        while (!(data_req == false)) {wait(); };
         data_valid.write(false);
         wait();
     };

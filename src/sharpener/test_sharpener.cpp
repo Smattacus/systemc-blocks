@@ -9,23 +9,23 @@
 int sc_main(int args, char ** argv) {
     //Do some setup and debugging.
     std::cout << "Hello world!" << endl;
-    // PNG_Reader test_reader;
-    // char fname[STRING_BUFFER_LENGTH] = "/workspaces/systemc-blocks/src/sharpener/Vd-Orig.png";
-    // test_reader.read_png(fname);
-    // std::cout << "Width: " << test_reader.get_width() << " Height = " << test_reader.get_height() << std::endl;
-    // std::cout << "First three rows:" << std::endl;
-    // std::cout << "[ " << +test_reader.row_pointers[0][0] << " " << +test_reader.row_pointers[0][1] << " " << +test_reader.row_pointers[0][2] << "]" << std::endl;
-    // std::cout << "[ " << +test_reader.row_pointers[1][0] << " " << +test_reader.row_pointers[1][1] << " " << +test_reader.row_pointers[1][2] << "]" << std::endl;
-    // std::cout << "[ " << +test_reader.row_pointers[2][0] << " " << +test_reader.row_pointers[2][1] << " " << +test_reader.row_pointers[2][2] << "]" << std::endl;
+    PNG_Reader test_reader;
+    char fname[STRING_BUFFER_LENGTH] = "/workspaces/systemc-blocks/src/sharpener/Vd-Orig.png";
+    test_reader.read_png(fname);
+    std::cout << "Width: " << test_reader.get_width() << " Height = " << test_reader.get_height() << std::endl;
+    std::cout << "First three rows:" << std::endl;
+    std::cout << "[ " << +test_reader.row_pointers[0][0] << " " << +test_reader.row_pointers[0][1] << " " << +test_reader.row_pointers[0][2] << "]" << std::endl;
+    std::cout << "[ " << +test_reader.row_pointers[1][0] << " " << +test_reader.row_pointers[1][1] << " " << +test_reader.row_pointers[1][2] << "]" << std::endl;
+    std::cout << "[ " << +test_reader.row_pointers[2][0] << " " << +test_reader.row_pointers[2][1] << " " << +test_reader.row_pointers[2][2] << "]" << std::endl;
 
     //Create signals
     std::cout << "Creating signals" << std::endl;
-    sc_signal< sc_int<8> > input_red;
-    sc_signal< sc_int<8> > input_green;
-    sc_signal< sc_int<8> > input_blue;
-    sc_signal< sc_int<8> > output_red;
-    sc_signal< sc_int<8> > output_green;
-    sc_signal< sc_int<8> > output_blue;
+    sc_signal< int > input_red;
+    sc_signal< int > input_green;
+    sc_signal< int > input_blue;
+    sc_signal< int > output_red;
+    sc_signal< int > output_green;
+    sc_signal< int > output_blue;
     sc_signal<bool> data_valid;
     sc_signal<bool> data_ack;
     sc_signal<bool> data_req;

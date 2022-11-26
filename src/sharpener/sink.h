@@ -5,9 +5,9 @@ class sink: sc_module {
         sc_in<bool> data_ready;
         sc_out<bool> data_ack;
 
-        sc_in<sc_int<8>> out_red;
-        sc_in<sc_int<8>> out_green;
-        sc_in<sc_int<8>> out_blue;
+        sc_in<int> out_red;
+        sc_in<int> out_green;
+        sc_in<int> out_blue;
 
         sc_in_clk CLK;
 
