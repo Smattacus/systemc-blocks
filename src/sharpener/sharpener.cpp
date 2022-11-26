@@ -16,11 +16,11 @@ int sharpener::sharpen_pixel_3x3kernel(int i, int j, int memory[][100], int kern
         0, 0, 0, 0, 0, 0, 0, 0, 0
     };
 
-    int im1 = (i - 1 < 0) ? i + 1 : i;
-    int ip1 = (i + 1 >= 100) ? i -1 : i;
+    int im1 = (i - 1 < 0) ? i + 1 : i - 1;
+    int ip1 = (i + 1 >= 100) ? i -1 : i + 1;
 
-    int jm1 = (j - 1 < 0) ? j + 1 : j;
-    int jp1 = (j + 1 >= 100) ? j - 1 : j;
+    int jm1 = (j - 1 < 0) ? j + 1 : j - 1;
+    int jp1 = (j + 1 >= 100) ? j - 1 : j + 1;
 
     // Sharpen it
     calc_kernel[0][0] = memory[im1][jm1] * kernel[0][0];
